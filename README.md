@@ -33,7 +33,7 @@ Six tables: three master tables (`customer_master`, `product_category_master`, `
 
 The original data was one wide table. Normalization split it up: the six spending columns became rows in `customer_spending`, the campaign columns became rows in `campaign_response`, and totals are calculated with `SUM()` instead of being stored.
 
-Beyond the report, the database also has a view, `customer_summary`. It gives one row per customer with education, income, recency (days since the last purchase), frequency (purchases across all four channels) and monetary value (total spending): the three inputs for RFM analysis. Its definition is in [`sql/views.sql`](sql/views.sql).
+The database also has a view, `customer_summary`. It gives one row per customer with education, income, recency (days since the last purchase), frequency (purchases across all four channels) and monetary value (total spending): the three inputs for RFM analysis. Its definition is in [`sql/views.sql`](sql/views.sql).
 
 ## Files
 
@@ -54,38 +54,6 @@ images/                     ER diagram and query outputs
 4. Run the queries in `sql/queries.sql`.
 
 If the import stops with error 1449 about a missing definer, delete the `DEFINER=...` part of the view line in the dump, or skip it and run `sql/views.sql` instead.
-
-## Database design
-
-Six tables: three master tables (`customer_master`, `product_category_master`, `campaign_master`) and three transaction tables (`customer_activity`, `customer_spending`, `campaign_response`), linked with primary and foreign keys.
-
-- `customer_master` to `customer_activity`: one-to-one
-- `customer_master` to `customer_spending`: one-to-many (one row per category)
-- `customer_master` to `campaign_master`: many-to-many, resolved by `campaign_response`
-
-![ER diagram](images/er_diagram.png)
-
-The original data was one wide table. Normalization split it up: the six spending columns became rows in `customer_spending`, the campaign columns became rows in `campaign_response`, and totals are calculated with `SUM()` instead of being stored.
-
-Beyond the report, the database also has a view, `customer_summary`. It gives one row per customer with education, income, recency (days since the last purchase), frequency (purchases across all four channels) and monetary value (total spending): the three inputs for RFM analysis. Its definition is in [`sql/views.sql`](sql/views.sql).
-
-## Files
-
-```
-sql/
-  schema.sql    table definitions
-  data.sql      the 30 customers and their related records
-  queries.sql   the seven queries
-images/         ER diagram and query outputs
-report/         the full project report (PDF)
-```
-
-## How to run
-
-1. Install MySQL 8.x and open a SQL client (MySQL Workbench or VS Code with a MySQL extension).
-2. Run `sql/schema.sql`. It creates the `loyalty_tracker` database and the six tables.
-3. Run `sql/data.sql` to load the records.
-4. Run the queries in `sql/queries.sql`.
 
 ## Data
 
