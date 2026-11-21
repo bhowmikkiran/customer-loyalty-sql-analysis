@@ -1,4 +1,4 @@
--- Customer Loyalty & Churn-Risk Tracker: the seven queries from Chapter 6 (MySQL 8.x)
+-- Customer Loyalty & Churn-Risk Tracker: the seven queries (MySQL 8.x)
 -- Import loyalty_tracker_dump.sql first (see the README).
 
 USE loyalty_tracker;
