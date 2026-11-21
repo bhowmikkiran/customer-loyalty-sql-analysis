@@ -1,5 +1,4 @@
 -- Customer Loyalty & Churn-Risk Tracker: table definitions (MySQL 8.x)
--- Source: DBMS Mini Project Report, section 4.2
 
 DROP DATABASE IF EXISTS loyalty_tracker;
 CREATE DATABASE loyalty_tracker;
